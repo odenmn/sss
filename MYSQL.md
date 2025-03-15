@@ -231,7 +231,27 @@ Tips: MYSQL不支持检查约束，但是可以通过Java检查
 
 
 
+## JDBC
 
+### DriverManager
+
+DriverManager(驱动管理类)作用:
+
+注册驱动（可省略）
+
+获取数据库连接
+
+<img src="MYSQL.assets/image-20250315142252641.png" alt="image-20250315142252641" style="zoom:80%;" /> 
+
+### Connection
+
+<img src="MYSQL.assets/image-20250315161859088.png" alt="image-20250315161859088" style="zoom:80%;" /> 
+
+事务管理
+
+<img src="MYSQL.assets/image-20250315162008324.png" alt="image-20250315162008324" style="zoom:80%;" /> 
+
+**可以用try catch捕获异常然后回滚事务**
 
 
 

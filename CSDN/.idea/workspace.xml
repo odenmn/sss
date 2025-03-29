@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="be2a898d-7ffc-459b-8e04-026098a2423a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/druid_1_1_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/druid_1_1_12__2_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/mysql_connector_j_8_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/mysql_connector_j_8_2_0__2_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/mysql_connector_j_8_2_0__3_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xjx/example/dao/ArticleDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xjx/example/dao/impl/ArticleDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xjx/example/entity/Article.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xjx/example/entity/Comment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xjx/example/entity/Report.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xjx/example/entity/Tag.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xjx/example/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xjx/example/util/JDBCUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/druid.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Maven/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/controller/AdminController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/controller/RegisterAndLoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/controller/StartController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/controller/StudentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/dao/CourseDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/dao/StudentCourseSelectionDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/dao/StudentDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/dao/UserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/entity/Course.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/entity/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/entity/StudentCourseSelection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/service/CourseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/service/StudentCourseSelectionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/service/StudentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/java/com/xjx/example/util/JDBCUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentCourseSystem/src/main/resources/druid.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../druid/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../jdbc-demo/jdbc-demo.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../jdbc-demo/src/jdbcdemo/JDBCDemo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../jdbc.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2uwNoFhRWXQbyBitl7k36Tp8DzD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "E:/csdn-blog-system-mvc-full-updated",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="be2a898d-7ffc-459b-8e04-026098a2423a" name="Changes" comment="" />
+      <created>1743155850045</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1743155850045</updated>
+      <workItem from="1743155851114" duration="46000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

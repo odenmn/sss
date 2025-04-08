@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ArticleDaoImpl implements ArticleDao {
     @Override
-    public boolean publishArticle(Article article) {
+    public boolean publishArticle(Article article) throws SQLException {
         String sql = "INSERT INTO article (title, content, user_id, publish_time,like_count) VALUES (?,?,?,?,?)";
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -25,13 +25,10 @@ public class ArticleDaoImpl implements ArticleDao {
             pstmt.setTimestamp(4, Timestamp.valueOf(article.getPublishTime()));
             pstmt.setInt(5, 0);
             return pstmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return false;
     }
     @Override
-    public boolean editArticle(Article article) {
+    public boolean editArticle(Article article) throws SQLException {
         String sql = "UPDATE article SET title = ?, content = ? WHERE article_id = ?";
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -39,27 +36,21 @@ public class ArticleDaoImpl implements ArticleDao {
             pstmt.setString(2, article.getContent());
             pstmt.setInt(3, article.getId());
             return pstmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return false;
     }
 
     @Override
-    public boolean deleteArticle(int articleId) {
+    public boolean deleteArticle(int articleId) throws SQLException {
         String sql = "DELETE FROM article WHERE article_id = ?";
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, articleId);
             return pstmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return false;
     }
 
     @Override
-    public List<Article> searchArticles(String keyword) {
+    public List<Article> searchArticles(String keyword) throws SQLException {
         List<Article> articles = new ArrayList<>();
         String sql = "SELECT * FROM article WHERE title LIKE ? OR content LIKE ?";
         try (Connection connection = JDBCUtils.getConnection();
@@ -81,14 +72,12 @@ public class ArticleDaoImpl implements ArticleDao {
                 article.setLikeCount(rs.getInt("like_count"));
                 articles.add(article);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return articles;
     }
 
     @Override
-    public List<Article> getArticlesByUser(User user) {
+    public List<Article> getArticlesByUser(User user) throws SQLException {
         List<Article> articles = new ArrayList<>();
         String sql = "SELECT * FROM article WHERE user_id = ?";
         try (Connection connection = JDBCUtils.getConnection();
@@ -108,8 +97,6 @@ public class ArticleDaoImpl implements ArticleDao {
                     articles.add(article);
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return articles;
     }
@@ -122,7 +109,7 @@ public class ArticleDaoImpl implements ArticleDao {
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, articleId);
             try (ResultSet rs = pstmt.executeQuery()){
-                while (rs.next()) {
+                if (rs.next()) {
                     article.setId(rs.getInt("article_id"));
                     article.setTitle(rs.getString("title"));
                     article.setContent(rs.getString("content"));
@@ -140,14 +127,14 @@ public class ArticleDaoImpl implements ArticleDao {
     }
 
     @Override
-    public Article getArticleByTitle(String title){
+    public Article getArticleByTitle(String title) throws SQLException {
         Article article = new Article();
         String sql = "SELECT * FROM article WHERE title = ?";
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1,title);
             try (ResultSet rs = pstmt.executeQuery()){
-                while (rs.next()) {
+                if (rs.next()) {
                     article.setId(rs.getInt("article_id"));
                     article.setTitle(rs.getString("title"));
                     article.setContent(rs.getString("content"));
@@ -158,38 +145,38 @@ public class ArticleDaoImpl implements ArticleDao {
                     article.setTop(rs.getBoolean("is_top"));
                     article.setLikeCount(rs.getInt("like_count"));
                 }
-            }return article;
-        } catch (SQLException e) {
-            e.printStackTrace();
+            }
+            return article;
         }
-        return null;
     }
 
     //
     @Override
-    public List<Article> getAllArticles(){
+    public List<Article> getAllArticles() throws SQLException {
         List<Article> articles = new ArrayList<>();
         String sql = "SELECT * FROM article";//查询
         try (Connection conn = JDBCUtils.getConnection();
              PreparedStatement prtmt = conn.prepareStatement(sql);
              ResultSet rs = prtmt.executeQuery()){
             while (rs.next()){
-                //遍历获得每个Article对象
-                int articleId = rs.getInt("article_id");
-                String title = rs.getString("title");
-                String content = rs.getString("content");
-                int author = rs.getInt("user_id");
-                String description = rs.getString("description");
-                articles.add(new Article());
+                Article article = new Article();
+                article.setId(rs.getInt("article_id"));
+                article.setTitle(rs.getString("title"));
+                article.setContent(rs.getString("content"));
+                UserDao userDao = new UserDaoImpl();
+                article.setAuthor(userDao.getUserById(rs.getInt("user_id")));
+                Timestamp timestamp = rs.getTimestamp("publish_time");
+                article.setPublishTime(timestamp.toLocalDateTime());
+                article.setTop(rs.getBoolean("is_top"));
+                article.setLikeCount(rs.getInt("like_count"));
+                articles.add(article);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return articles;
     }
 
     @Override
-    public List<Article> getHotArticles(int limit) {
+    public List<Article> getHotArticles(int limit) throws SQLException {
         List<Article> articles = new ArrayList<>();
         String sql = "SELECT * FROM article ORDER BY like_count DESC LIMIT ?";
         try (Connection connection = JDBCUtils.getConnection();
@@ -211,8 +198,6 @@ public class ArticleDaoImpl implements ArticleDao {
                     articles.add(article);
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return articles;
     }

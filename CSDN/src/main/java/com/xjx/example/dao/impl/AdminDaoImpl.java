@@ -17,36 +17,29 @@ public class AdminDaoImpl implements AdminDao {
 
     // 删除文章
     @Override
-    public boolean deleteArticle(int articleId) {
+    public boolean deleteArticle(int articleId) throws SQLException {
         String sql = "DELETE FROM article WHERE article_id = ?";
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, articleId);
             return pstmt.executeUpdate() > 0;
-        }catch (SQLException e) {
-            e.printStackTrace();
         }
-        return false;
     }
 
     // 删除评论
     @Override
-    public boolean deleteComment(int commentId){
+    public boolean deleteComment(int commentId) throws SQLException {
         String sql = "DELETE FROM comment WHERE id = ?";
-
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, commentId);
             return pstmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return false;
     }
 
     // 处理举报
     @Override
-    public boolean processReport(int reportId, String result) {
+    public boolean processReport(int reportId, String result) throws SQLException {
         String sql = "UPDATE report SET status = ?, process_time = ? WHERE id = ?";
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -55,15 +48,12 @@ public class AdminDaoImpl implements AdminDao {
             pstmt.setTimestamp(2,Timestamp.valueOf(currentTime));
             pstmt.setInt(3, reportId);
             return pstmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return false;
     }
 
     // 查看待处理的举报
     @Override
-    public List<Report> getPendingReports() {
+    public List<Report> getPendingReports() throws SQLException {
         List<Report> reports = new ArrayList<>();
         String sql = "SELECT * FROM report WHERE status = 'pending'";
         try (Connection connection = JDBCUtils.getConnection();
@@ -87,8 +77,6 @@ public class AdminDaoImpl implements AdminDao {
                     reports.add(report);
                 }
             }
-        }catch (SQLException e) {
-            e.printStackTrace();
         }
         return reports;
     }

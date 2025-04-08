@@ -19,32 +19,62 @@ public class ArticleServiceImpl implements ArticleService {
     public boolean publishArticle(Article article) {
         LocalDateTime currentTime = LocalDateTime.now();
         article.setPublishTime(currentTime);
-        return articleDao.publishArticle(article);
+        try {
+            return articleDao.publishArticle(article);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean editArticle(Article article) {
-        return articleDao.editArticle(article);
+        try {
+            return articleDao.editArticle(article);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean deleteArticle(int articleId) {
-        return articleDao.deleteArticle(articleId);
+        try {
+            return articleDao.deleteArticle(articleId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public List<Article> searchArticles(String keyword) {
-        return articleDao.searchArticles(keyword);
+        try {
+            return articleDao.searchArticles(keyword);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public List<Article> getArticlesByUser(User user) {
-        return articleDao.getArticlesByUser(user);
+        try {
+            return articleDao.getArticlesByUser(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public Article getArticleByTitle(String title) {
-        return articleDao.getArticleByTitle(title);
+        try {
+            return articleDao.getArticleByTitle(title);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -59,7 +89,12 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> getHotArticles(int limit) {
-        return articleDao.getHotArticles(limit);
+        try {
+            return articleDao.getHotArticles(limit);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

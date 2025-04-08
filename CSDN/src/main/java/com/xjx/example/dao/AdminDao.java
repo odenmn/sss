@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface AdminDao {
     // 删除文章的方法，传入文章ID
-    boolean deleteArticle(int articleId);
+    boolean deleteArticle(int articleId) throws SQLException;
     // 删除评论的方法，传入评论ID
-    boolean deleteComment(int commentId);
+    boolean deleteComment(int commentId) throws SQLException;
     // 处理举报的方法，传入举报ID和处理结果
-    boolean processReport(int reportId, String result);
+    boolean processReport(int reportId, String result) throws SQLException;
     // 获取待处理举报列表的方法，返回待处理举报的列表
-    List<Report> getPendingReports();
+    List<Report> getPendingReports() throws SQLException;
 }

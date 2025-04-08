@@ -2,14 +2,13 @@ package com.xjx.example.entity;
 
 public class Tag {
     private int id;
-    private String name;
+    private String tagName;
 
     public Tag() {
     }
-
-    public Tag(int id, String name) {
+    public Tag(int id, String tagName) {
         this.id = id;
-        this.name = name;
+        this.tagName = tagName;
     }
 
     public int getId() {
@@ -20,11 +19,11 @@ public class Tag {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTagName() {
+        return tagName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
     }
-}    
+}

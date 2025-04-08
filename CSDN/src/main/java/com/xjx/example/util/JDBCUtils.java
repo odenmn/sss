@@ -28,8 +28,6 @@ public class JDBCUtils {
         return ds.getConnection();
     }
 
-
-    //在异常处理中用了try-with-resources
     public static void closeConnection(Connection connection) {
         if (connection != null) {
             try {

@@ -35,6 +35,10 @@ public class ColumnController {
     public boolean addArticleToColumn(int columnId, int articleId){
         return columnService.addArticleToColumn(columnId,articleId);
     }
+    // 将文章移除出专栏
+    public void removeArticleFromColumn(int articleId){
+        columnService.removeArticleFromColumn(articleId);
+    }
     // 根据栏目获取文章
     public List<Article> getArticlesByColumn(int columnId){
         return columnService.getArticlesByColumn(columnId);

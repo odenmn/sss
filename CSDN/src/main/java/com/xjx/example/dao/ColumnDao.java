@@ -15,5 +15,5 @@ public interface ColumnDao {
     List<Column> searchColumnsByColumnName(String columnName) throws SQLException;
     List<Column> getColumnsByUser(User user) throws SQLException;
     boolean addArticleToColumn(int columnId, int articleId) throws SQLException;
-
+    void removeArticleFromColumn(int articleId) throws SQLException;
 }

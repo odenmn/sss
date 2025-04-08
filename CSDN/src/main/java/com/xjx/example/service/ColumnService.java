@@ -22,4 +22,6 @@ public interface ColumnService {
     boolean addArticleToColumn(int columnId, int articleId);
     // 根据栏目获取文章
     List<Article> getArticlesByColumn(int columnId);
+    // 将文章移除出专栏
+    void removeArticleFromColumn(int articleId);
 }

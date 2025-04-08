@@ -1,7 +1,5 @@
 package com.xjx.example.dao.impl;
 
-import com.xjx.example.dao.AdminDao;
-import com.xjx.example.dao.ArticleDao;
 import com.xjx.example.dao.ColumnDao;
 import com.xjx.example.dao.UserDao;
 import com.xjx.example.entity.Article;
@@ -10,7 +8,6 @@ import com.xjx.example.entity.User;
 import com.xjx.example.util.JDBCUtils;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,6 +155,16 @@ public class ColumnDaoImpl implements ColumnDao {
             pstmt.setInt(1, columnId);
             pstmt.setInt(2, articleId);
             return pstmt.executeUpdate() > 0;
+        }
+    }
+
+    @Override
+    public void removeArticleFromColumn(int articleId) throws SQLException {
+        String sql = "DELETE FROM column_article WHERE article_id = ?";
+        try (Connection conn = JDBCUtils.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, articleId);
+            pstmt.executeUpdate();
         }
     }
 }

@@ -95,5 +95,14 @@ public class ColumnServiceImpl implements ColumnService {
         }
     }
 
+    @Override
+    public void removeArticleFromColumn(int articleId) {
+        try {
+            columnDao.removeArticleFromColumn(articleId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

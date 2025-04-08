@@ -1,25 +1,35 @@
 package com.xjx.example.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Report {
     private int id;
     private User reporter;
+    private Comment reportedComment;
     private Article reportedArticle;
     private String reason;
     private String status;
-    private Date reportTime;
+    private LocalDateTime reportTime;
 
     public Report() {
     }
 
-    public Report(int id, User reporter, Article reportedArticle, String reason, String status, Date reportTime) {
+    public Report(int id, User reporter, Comment comment, Article reportedArticle, String reason, String status, LocalDateTime reportTime) {
         this.id = id;
         this.reporter = reporter;
+        this.reportedComment = comment;
         this.reportedArticle = reportedArticle;
         this.reason = reason;
         this.status = status;
         this.reportTime = reportTime;
+    }
+
+    public Comment getReportedComment() {
+        return reportedComment;
+    }
+
+    public void setReportedComment(Comment reportedComment) {
+        this.reportedComment = reportedComment;
     }
 
     public int getId() {
@@ -62,11 +72,11 @@ public class Report {
         this.status = status;
     }
 
-    public Date getReportTime() {
+    public LocalDateTime getReportTime() {
         return reportTime;
     }
 
-    public void setReportTime(Date reportTime) {
+    public void setReportTime(LocalDateTime reportTime) {
         this.reportTime = reportTime;
     }
 }    

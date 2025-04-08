@@ -1,9 +1,11 @@
 package com.xjx.example.dao.impl;
 
 import com.xjx.example.dao.ArticleDao;
+import com.xjx.example.dao.CommentDao;
 import com.xjx.example.dao.ReportDao;
 import com.xjx.example.dao.UserDao;
 import com.xjx.example.entity.Article;
+import com.xjx.example.entity.Comment;
 import com.xjx.example.entity.Report;
 import com.xjx.example.entity.User;
 import com.xjx.example.util.JDBCUtils;
@@ -29,10 +31,7 @@ public class ReportDaoImpl implements ReportDao {
                 pstmt.setInt(3, report.getReportedComment().getId());
             }
             pstmt.setString(4, report.getReason());
-
-
             pstmt.setString(5, "pending");
-
             return pstmt.executeUpdate() > 0;
         }
     }
@@ -57,6 +56,11 @@ public class ReportDaoImpl implements ReportDao {
                     ArticleDao articleDao = new ArticleDaoImpl();
                     Article reportedArticle = articleDao.getArticleById(articleId);
                     report.setReportedArticle(reportedArticle);
+                    // 获取被举报评论信息
+                    int commentId = rs.getInt("comment_id");
+                    CommentDao commentDao = new CommentDaoImpl();
+                    Comment reportedComment = commentDao.getCommentById(commentId);
+                    report.setReportedComment(reportedComment);
                     report.setStatus(rs.getString("status"));
                     report.setReason(rs.getString("reason"));
                     return report;
@@ -101,6 +105,11 @@ public class ReportDaoImpl implements ReportDao {
                     ArticleDao articleDao = new ArticleDaoImpl();
                     Article reportedArticle = articleDao.getArticleById(articleId);
                     report.setReportedArticle(reportedArticle);
+                    // 获取被举报评论信息
+                    int commentId = rs.getInt("comment_id");
+                    CommentDao commentDao = new CommentDaoImpl();
+                    Comment reportedComment = commentDao.getCommentById(commentId);
+                    report.setReportedComment(reportedComment);
                     report.setStatus(rs.getString("status"));
                     report.setReason(rs.getString("reason"));
                     reports.add(report);

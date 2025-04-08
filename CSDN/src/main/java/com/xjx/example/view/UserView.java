@@ -957,6 +957,7 @@ public class UserView {
                         System.out.println("评论发布成功！");
                         // 重新获取文章数据
                         article = articleController.getArticleById(articleId);
+                        displayComments(article);
                     }else {
                         System.out.println("评论发布失败~~");
                     }
@@ -1269,7 +1270,7 @@ public class UserView {
                 if (content.startsWith("\n")) {
                     content = content.substring(1);
                 }
-                System.out.println(i++ + ". " + comment.getUser().getUsername() + "：" + content);
+                System.out.println(i++ + ". " + comment.getUser().getUsername() + "：" + content + "  评论ID:" + comment.getId());
             }
             System.out.println("==================");
         }

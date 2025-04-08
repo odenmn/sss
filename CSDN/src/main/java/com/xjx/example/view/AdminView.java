@@ -50,8 +50,8 @@ public class AdminView {
                                 System.out.println("1. 删除违规文章");
                                 System.out.println("2. 删除违规评论");
                                 System.out.println("3. 封禁用户");
-                                System.out.println(". 返回");
-                                System.out.println("请选择操作编号");
+                                System.out.println("4. 返回");
+                                System.out.println("请选择操作编号：");
                                 String choice = scanner.next();
                                 switch (choice) {
                                     case "1":
@@ -62,6 +62,7 @@ public class AdminView {
                                         break;
                                     case "3":
                                         banUser(report);
+                                        break;
                                     case "4":
                                         System.out.println("返回成功");
                                         break;
@@ -170,13 +171,13 @@ public class AdminView {
         while (true) {
             try {
                 System.out.println("请输入要删除的评论ID（输入0返回）:");
-                int commentId = scanner.nextInt();
-                scanner.nextLine();
+                String commentID = scanner.next();
+                int commentId = Integer.parseInt(commentID);
                 if (commentId == 0){
                     System.out.println("返回成功！");
                     return;
                 }
-                if (report.getReportedComment().getId() != commentId){
+                else if (report.getReportedComment().getId() != commentId){
                     System.out.println("输入有误，请重新输入！");
                     continue;
                 }
@@ -187,8 +188,9 @@ public class AdminView {
                 }
                 reportResult(report.getId());
                 break;
-            } catch (Exception e) {
-                System.out.println("输入无效，请输入一个有效的整数");
+            } catch (NumberFormatException e) {
+                System.out.println("输入无效，请jc");
+                scanner.nextLine();
             }
         }
     }
@@ -209,10 +211,10 @@ public class AdminView {
                 System.out.println("文章内容：" + reportedArticle.getContent());
             }
             if (reportedComment != null){
-                System.out.println("被举报的评论ID：" + reportedComment.getId() + "用户：" + reportedComment.getUser().getUsername());
+                System.out.println("被举报的评论ID：" + reportedComment.getId() + "  用户：" + reportedComment.getUser().getUsername());
                 System.out.println("评论内容：" + reportedComment.getContent());
             }
-            }
+        }
         return true;
         }
 

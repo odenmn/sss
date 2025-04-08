@@ -29,22 +29,21 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserByUsername(String username) throws SQLException {
         String sql = "SELECT * FROM users WHERE username = ?";
-        Connection connection = JDBCUtils.getConnection();
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)){
             pstmt.setString(1, username);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
-                user.setSalt(rs.getString("salt"));
-                user.setBanned(rs.getBoolean("is_banned"));
-                user.setRole(rs.getString("role"));
-                return user;
+            try(ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    User user = new User();
+                    user.setId(rs.getInt("id"));
+                    user.setUsername(rs.getString("username"));
+                    user.setPassword(rs.getString("password"));
+                    user.setSalt(rs.getString("salt"));
+                    user.setBanned(rs.getBoolean("is_banned"));
+                    user.setRole(rs.getString("role"));
+                    return user;
+                }
             }
-        } finally {
-            JDBCUtils.closeConnection(connection);
         }
         return null;
     }
@@ -52,8 +51,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserByUserId(int userId) throws SQLException {
         String sql = "SELECT * FROM users WHERE id = ?";
-        Connection connection = JDBCUtils.getConnection();
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)){
             pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -66,16 +65,14 @@ public class UserDaoImpl implements UserDao {
                 user.setRole(rs.getString("role"));
                 return user;
             }
-        } finally {
-            JDBCUtils.closeConnection(connection);
         }
         return null;
     }
     @Override
     public User getUserById(int userId) throws SQLException {
         String sql = "SELECT * FROM users WHERE id = ?";
-        Connection connection = JDBCUtils.getConnection();
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)){
             pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -88,13 +85,11 @@ public class UserDaoImpl implements UserDao {
                 user.setRole(rs.getString("role"));
                 return user;
             }
-        } finally {
-            JDBCUtils.closeConnection(connection);
         }
         return null;
     }
     @Override
-    public List<User> searchUsers(String keyword) {
+    public List<User> searchUsers(String keyword) throws SQLException {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users WHERE username LIKE ? ";
         try (Connection connection = JDBCUtils.getConnection();
@@ -108,8 +103,6 @@ public class UserDaoImpl implements UserDao {
                     users.add(user);
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return users;
     }
@@ -142,26 +135,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean addReport(Report report) throws SQLException {
-        String sql = "INSERT INTO report (user_id, article_id, comment_id, reason, status) VALUES (?, ?, ?, ?, ?)";
+    public boolean banUser(int userId) throws SQLException {
+        String sql = "UPDATE users SET is_banned = true WHERE id = ?";
         try (Connection conn = JDBCUtils.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, report.getReporter().getId());
-            // 判断举报的是文章还是评论
-            if (report.getReportedComment() == null) {
-                pstmt.setInt(2, report.getReportedArticle().getId());
-                pstmt.setInt(3, 0);
-            }else {
-                pstmt.setInt(2, 0);
-                pstmt.setInt(3, report.getReportedComment().getId());
-            }
-            pstmt.setString(4, report.getReason());
-
-
-            pstmt.setString(5, "pending");
-
+            pstmt.setInt(1, userId);
             return pstmt.executeUpdate() > 0;
         }
     }
+
 
 }

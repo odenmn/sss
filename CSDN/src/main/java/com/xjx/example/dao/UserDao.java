@@ -20,7 +20,7 @@ public interface UserDao {
     User getUserById(int userId) throws SQLException;
 
     // 搜索用户
-    List<User> searchUsers(String keyword);
+    List<User> searchUsers(String keyword) throws SQLException;
 
     //更新用户信息
     boolean updateUser(User user) throws SQLException;
@@ -28,6 +28,5 @@ public interface UserDao {
     //删除用户
     boolean deleteUser(int userId) throws SQLException;
 
-    //添加举报
-    boolean addReport(Report report) throws SQLException;
+    boolean banUser(int userId) throws SQLException;
 }

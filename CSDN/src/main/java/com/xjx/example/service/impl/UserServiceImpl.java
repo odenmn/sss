@@ -41,7 +41,12 @@ public class UserServiceImpl implements UserService {
         }
     }
     public List<User> searchUsers(String keyword){
-        return userDao.searchUsers(keyword);
+        try {
+            return userDao.searchUsers(keyword);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public boolean updateUser(User user) {
@@ -86,14 +91,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean addReport(Report report) {
+    public boolean banUser(int userId) {
         try {
-            return userDao.addReport(report);
+            return userDao.banUser(userId);
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
-
 
 }

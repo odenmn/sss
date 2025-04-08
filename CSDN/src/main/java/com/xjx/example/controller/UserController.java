@@ -26,9 +26,9 @@ public class UserController {
         return userService.deleteUser(userId);
     }
 
-    // 添加举报
-    public boolean addReport(Report report){
-        return userService.addReport(report);
+    // 封禁用户
+    public boolean banUser(int userId){
+        return userService.banUser(userId);
     }
 
 }

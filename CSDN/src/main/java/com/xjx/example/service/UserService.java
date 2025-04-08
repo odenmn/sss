@@ -15,5 +15,6 @@ public interface UserService {
     boolean deleteUser(int userId);
     boolean register(User user);
     boolean login(String username, String password);
-    boolean addReport(Report report);
+    // 封禁用户
+    boolean banUser(int userId);
 }

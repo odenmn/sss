@@ -18,6 +18,7 @@ public class UserView {
     private LikeController likeController = new LikeController();
     private TagController tagController = new TagController();
     private ColumnController columnController = new ColumnController();
+    private ReportController reportController = new ReportController();
     private FollowingController followingController = new FollowingController();
 
     // 日期时间格式化器，用于将日期时间对象格式化为指定格式的字符串
@@ -1013,8 +1014,12 @@ public class UserView {
                     break;
                 case "7":
                     System.out.println("--------添加标签--------");
-                    System.out.println("请输入要添加的标签内容：");
+                    System.out.println("请输入要添加的标签内容（输入0返回）：");
                     String tagName = scanner.next();
+                    if (tagName.equals("0")){
+                        System.out.println("返回成功");
+                        break;
+                    }
                     if (tagController.addTagToArticle(articleId,tagName)) {
                         System.out.println("标签添加成功！");
                     }else {
@@ -1023,6 +1028,10 @@ public class UserView {
                     break;
                 case "8":
                     System.out.println("--------举报该文章--------");
+                    if (author.getId() == userId){
+                        System.out.println("OiOi怎么要举报自己。。。");
+                        break;
+                    }
                     Report aricleReport = new Report();
                     System.out.println("请输入举报的理由：");
                     String reason1 = scanner.next();
@@ -1030,7 +1039,7 @@ public class UserView {
                     Article reportedArticle = articleController.getArticleById(articleId);
                     aricleReport.setReportedArticle(reportedArticle);
                     aricleReport.setReason(reason1);
-                    if (userController.addReport(aricleReport)){
+                    if (reportController.addReport(aricleReport)){
                         System.out.println("举报成功！");
                     }else {
                         System.out.println("举报失败~~");
@@ -1041,20 +1050,29 @@ public class UserView {
                         try {
                             System.out.println("--------举报评论--------");
                             Report commentReport = new Report();
-                            System.out.println("请输入要举报的评论ID：");
+                            System.out.println("请输入要举报的评论ID（输入0返回）：");
                             String commentID = scanner.next();
                             int commentId = Integer.parseInt(commentID);
+                            Comment reportedComment = commentController.getCommentById(commentId);
+                            if (commentId == 0){
+                                System.out.println("返回成功！");
+                                break;
+                            }
+                            if (reportedComment.getUser().getId() == userId){
+                                System.out.println("OiOi怎么要举报自己。。。");
+                                break;
+                            }
                             if (commentController.getCommentById(commentId) == null){
                                 System.out.println("该评论不存在，请检查输入！");
                                 continue;
                             }
                             System.out.println("请输入举报的理由");
                             String reason2 = scanner.next();
+
                             commentReport.setReporter(user);
-                            Comment reportedComment = commentController.getCommentById(commentId);
                             commentReport.setReportedComment(reportedComment);
                             commentReport.setReason(reason2);
-                            if (userController.addReport(commentReport)){
+                            if (reportController.addReport(commentReport)){
                                 System.out.println("举报成功！");
                             }else {
                                 System.out.println("举报失败~~");
@@ -1166,6 +1184,7 @@ public class UserView {
                 }
                 if(!isCorrectArticle){
                     System.out.println("该文章不属于要查看的文章列表，请重新输入！");
+                    continue;
                 }
 
                 printArticleDetails(article);

@@ -37,6 +37,7 @@ public class AdminDaoImpl implements AdminDao {
         }
     }
 
+
     // 处理举报
     @Override
     public boolean processReport(int reportId, String result) throws SQLException {

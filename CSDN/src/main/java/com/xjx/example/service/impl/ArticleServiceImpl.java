@@ -2,11 +2,10 @@ package com.xjx.example.service.impl;
 
 import com.xjx.example.dao.ArticleDao;
 import com.xjx.example.dao.impl.ArticleDaoImpl;
-import com.xjx.example.entity.Article;
-import com.xjx.example.entity.Column;
-import com.xjx.example.entity.Tag;
-import com.xjx.example.entity.User;
+import com.xjx.example.entity.*;
 import com.xjx.example.service.ArticleService;
+import com.xjx.example.service.ColumnService;
+import com.xjx.example.service.CommentService;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -14,7 +13,8 @@ import java.util.List;
 
 public class ArticleServiceImpl implements ArticleService {
     private ArticleDao articleDao = new ArticleDaoImpl();
-
+    public CommentService commentService = new CommentServiceImpl();
+    public ColumnService columnService = new ColumnServiceImpl();
     @Override
     public boolean publishArticle(Article article) {
         LocalDateTime currentTime = LocalDateTime.now();
@@ -40,7 +40,11 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public boolean deleteArticle(int articleId) {
         try {
-            return articleDao.deleteArticle(articleId);
+            // 删除评论
+            commentService.deleteAllCommentsByArticleId(articleId);
+            // 删除和专栏的联系
+           columnService.removeArticleFromColumn(articleId);
+           return articleDao.deleteArticle(articleId);
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -146,4 +150,6 @@ public class ArticleServiceImpl implements ArticleService {
             return false;
         }
     }
+
+
 }

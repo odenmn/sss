@@ -1,5 +1,6 @@
 package com.xjx.example.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Comment {
@@ -7,13 +8,13 @@ public class Comment {
     private String content;
     private User user;
     private Article article;
-    private Date publishTime;
+    private LocalDateTime publishTime;
     private int likeCount;
 
     public Comment() {
     }
 
-    public Comment(int id, String content, User user, Article article, Date publishTime, int likeCount) {
+    public Comment(int id, String content, User user, Article article, LocalDateTime publishTime, int likeCount) {
         this.id = id;
         this.content = content;
         this.user = user;
@@ -54,11 +55,11 @@ public class Comment {
         this.article = article;
     }
 
-    public Date getPublishTime() {
+    public LocalDateTime getPublishTime() {
         return publishTime;
     }
 
-    public void setPublishTime(Date publishTime) {
+    public void setPublishTime(LocalDateTime publishTime) {
         this.publishTime = publishTime;
     }
 

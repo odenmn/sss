@@ -35,6 +35,16 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    @Override
+    public boolean deleteAllCommentsByArticleId(int articleId) {
+        try {
+            return commentDao.deleteAllCommentsByArticleId(articleId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public Comment getCommentById(int commentId){
         try {
             return commentDao.getCommentById(commentId);

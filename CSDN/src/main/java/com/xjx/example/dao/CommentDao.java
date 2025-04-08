@@ -11,6 +11,8 @@ public interface CommentDao {
     boolean addComment(Comment comment) throws SQLException;
     // 删除评论
     boolean deleteComment(int commentId) throws SQLException;
+    // 删除文章的全部评论
+    boolean deleteAllCommentsByArticleId(int articleId) throws SQLException;
     // 根据评论ID获取评论
     Comment getCommentById(int commentId) throws SQLException;
     // 根据文章获取评论

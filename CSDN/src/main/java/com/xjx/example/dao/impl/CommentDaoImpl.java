@@ -1,6 +1,5 @@
 package com.xjx.example.dao.impl;
 
-import com.xjx.example.dao.ArticleDao;
 import com.xjx.example.dao.CommentDao;
 import com.xjx.example.entity.Article;
 import com.xjx.example.entity.Comment;
@@ -40,6 +39,17 @@ public class CommentDaoImpl implements CommentDao {
             return pstmt.executeUpdate() > 0;
         } finally {
             JDBCUtils.closeConnection(connection);
+        }
+    }
+
+    // 删除文章的全部评论
+    @Override
+    public boolean deleteAllCommentsByArticleId(int articleId) throws SQLException {
+        String sql = "DELETE FROM comment WHERE article_id = ?";
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, articleId);
+            return pstmt.executeUpdate() > 0;
         }
     }
 

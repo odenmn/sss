@@ -2,16 +2,17 @@ package com.xjx.example.view;
 
 import com.xjx.example.controller.AdminController;
 import com.xjx.example.controller.ArticleController;
-import com.xjx.example.controller.RegisterAndLoginController;
+import com.xjx.example.service.RegisterAndLoginService;
 import com.xjx.example.controller.UserController;
 import com.xjx.example.entity.User;
+import com.xjx.example.service.impl.RegisterAndLoginServiceImpl;
 
 import java.util.Scanner;
 
 public class StartView {
     AdminController adminController = new AdminController();
     ArticleController articleController = new ArticleController();
-    RegisterAndLoginController registerAndLoginController = new RegisterAndLoginController();
+    RegisterAndLoginService registerAndLoginService = new RegisterAndLoginServiceImpl();
     UserController userController = new UserController();
     UserView userView = new UserView();
     AdminView adminView = new AdminView();
@@ -30,7 +31,7 @@ public class StartView {
             switch (command) {
                 case "1":
                     // 登录
-                    User user = new RegisterAndLoginController().Login();
+                    User user = registerAndLoginService.Login();
                     if (user == null){
                         break;
                     }
@@ -44,7 +45,7 @@ public class StartView {
                     break;
                 case "2":
                     // 注册用户
-                    registerAndLoginController.register();
+                    registerAndLoginService.register();
                     break;
                 case "3":
                     //退出系统

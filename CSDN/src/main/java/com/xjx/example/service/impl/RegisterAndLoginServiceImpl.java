@@ -1,12 +1,12 @@
-package com.xjx.example.controller;
+package com.xjx.example.service.impl;
 
 import com.xjx.example.entity.User;
+import com.xjx.example.service.RegisterAndLoginService;
 import com.xjx.example.service.UserService;
-import com.xjx.example.service.impl.UserServiceImpl;
 
 import java.util.Scanner;
 
-public class RegisterAndLoginController {
+public class RegisterAndLoginServiceImpl implements RegisterAndLoginService {
     Scanner sc = new Scanner(System.in);
     UserService userService = new UserServiceImpl();
 

@@ -7,17 +7,19 @@ public class Article {
     private String title;
     private String content;
     private User author;
+    private boolean isTop;
     private LocalDateTime publishTime;
     private int likeCount;
 
     public Article() {
     }
 
-    public Article(int id, String title, String content, User author, LocalDateTime publishTime, int likeCount) {
+    public Article(int id, String title, String content, User author, boolean isTop, LocalDateTime publishTime, int likeCount) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.author = author;
+        this.isTop = isTop;
         this.publishTime = publishTime;
         this.likeCount = likeCount;
     }
@@ -60,6 +62,14 @@ public class Article {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public boolean isTop() {
+        return isTop;
+    }
+
+    public void setTop(boolean top) {
+        isTop = top;
     }
 
     public LocalDateTime getPublishTime() {

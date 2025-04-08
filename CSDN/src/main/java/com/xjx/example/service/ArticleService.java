@@ -1,53 +1,35 @@
 package com.xjx.example.service;
 
-import com.xjx.example.dao.AdminDao;
-import com.xjx.example.dao.ArticleDao;
-import com.xjx.example.dao.impl.AdminDaoImpl;
-import com.xjx.example.dao.impl.ArticleDaoImpl;
 import com.xjx.example.entity.Article;
-import com.xjx.example.entity.Report;
 import com.xjx.example.entity.Tag;
 import com.xjx.example.entity.User;
 
-import java.sql.SQLException;
 import java.util.List;
 
-public class ArticleService {
-    private ArticleDao articleDao = new ArticleDaoImpl();
+public interface ArticleService {
 
-    public boolean publishArticle(Article article) {
-        return articleDao.publishArticle(article);
-    }
-
-    public boolean editArticle(Article article) {
-        return articleDao.editArticle(article);
-    }
-
-    public boolean deleteArticle(int articleId) {
-        return articleDao.deleteArticle(articleId);
-    }
-
-    public List<Article> searchArticles(String keyword) {
-        return articleDao.searchArticles(keyword);
-    }
-
-    public List<Article> getArticlesByUser(User user) {
-        return articleDao.getArticlesByUser(user);
-    }
-
-    public List<Article> getHotArticles() {
-        return articleDao.getHotArticles();
-    }
-
-    public boolean addTagsToArticle(int articleId, List<Tag> tags) {
-        return articleDao.addTagsToArticle(articleId, tags);
-    }
-
-    public List<Tag> getTagsByArticle(int articleId) {
-        return articleDao.getTagsByArticle(articleId);
-    }
-
-    public boolean updateArticleLikeCount(int articleId, int likeCount){
-        return articleDao.updateArticleLikeCount(articleId,likeCount);
-    }
+    // 发布文章
+    boolean publishArticle(Article article);
+    // 编辑文章
+    boolean editArticle(Article article);
+    // 删除文章
+    boolean deleteArticle(int articleId);
+    // 根据关键字搜索文章
+    List<Article> searchArticles(String keyword);
+    // 根据用户获取文章列表
+    List<Article> getArticlesByUser(User user);
+    // 根据文章标题获取文章
+    Article getArticleByTitle(String title);
+    // 根据文章Id获取文章
+    Article getArticleById(int articleId);
+    // 获取热门文章列表
+    List<Article> getHotArticles(int limit);
+    // 置顶文章
+    boolean setArticleTop(int articleId,List<Article> articlesByColumn);
+    // 取消文章置顶
+    boolean cancelArticleTop(int articleId);
+    // 添加点赞数
+    boolean increaseLikeCount(int articleId);
+    // 减少点赞数
+    boolean decreaseLikeCount(int articleId);
 }

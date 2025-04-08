@@ -291,6 +291,10 @@ public class UserView {
     }
 
     public void publishArticle(User user){
+        if (user.isBanned()){
+            System.out.println("你已被封禁，无法发布博文！");
+            return;
+        }
         Article article = new Article();
         System.out.println("--------发布博文--------");
         System.out.println("请输入文章的标题：");
@@ -927,6 +931,10 @@ public class UserView {
                     }
                     break;
                 case "3":
+                    if (user.isBanned()){
+                        System.out.println("你已被封禁，无法发布评论！");
+                        break;
+                    }
                     System.out.println("--------发布评论--------");
                     Comment comment = new Comment();
 
